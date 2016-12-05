@@ -73,8 +73,20 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:title, :BookCode, :author, :numOfCopies, :popularity, :image)
     end
+
+      def user_params
+      params.require(:user).permit(:email,:userName, :password, :admin, :password_confirmation)
+    end
+    
     def authorize_admin
-      return unless !current_user.nil? && !current_user.admin?
-      redirect_to root_path, alert: 'Admins only!'
+      if current_user.nil? 
+        redirect_to root_path
+      elsif !current_user.admin?
+        redirect_to root_path
+      end
+
+
+      #return unless !current_user.nil? || !current_user.admin?
+      #redirect_to root_path, alert: 'Admins only!'
     end
 end
