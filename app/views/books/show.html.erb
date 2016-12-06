@@ -27,7 +27,7 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @book.image %>
+  <%= image_tag @book.image_url %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |

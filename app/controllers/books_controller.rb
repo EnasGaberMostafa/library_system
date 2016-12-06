@@ -6,7 +6,16 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+      if params[:search]
+      values = { search: "%#{ params[:search] }%" }
+
+      conditions = %q{ books.title          LIKE :search
+                       OR books.author      LIKE :search}
+
+      @books = Book.where(conditions, values).order('created_at DESC')
+    else
+      @books = Book.order('created_at DESC')
+    end
   end
 
   # GET /books/1

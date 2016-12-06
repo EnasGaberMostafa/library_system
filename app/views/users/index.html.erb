@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
-
+<div class = "row">
+  <%= form_tag url_for(:controller=>"users", :action => "index"), :method => :get do %>
+    <%= text_field_tag :search, nil, :placeholder => 'Search users.', 
+    :class => 'search_form'%>
+    <%= submit_tag "Search", :class => "btn btn-primary"%>
+  <% end %>
+</div>
 <h1>Listing Users</h1>
 
 <table>

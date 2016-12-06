@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 <div class = "row">
-  <%= form_tag url_for(:controller=>"books", :action => "index"), :method => :get do %>
-    <%= text_field_tag :search, nil, :placeholder => 'Search books.', 
-    :class => 'search_form'%>
-    <%= submit_tag "Search", :class => "btn btn-primary"%>
-  <% end %>
+	<%= form_tag url_for(:controller=>"users_pages", :action => "home_page"), :method => :get do %>
+	  <%= text_field_tag :search, nil, :placeholder => 'Search books.', 
+	  :class => 'search_form'%>
+	  <%= submit_tag "Search", :class => "btn btn-primary"%>
+	<% end %>
 </div>
-<h1>Listing Books</h1>
+<h1>Newly Added Books</h1>
 
 <table>
   <thead>
@@ -30,6 +30,7 @@
         <td><%= book.numOfCopies %></td>
         <td><%= book.popularity %></td>
         <td><%= image_tag book.image_url %></td>
+        <td><%= book.created_at %></td>
         <td><%= link_to 'Show', book %></td>
         <% if !current_user.nil? && current_user.admin?%>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
@@ -42,5 +43,5 @@
 
 <br>
 <% if !current_user.nil? && current_user.admin? %>
-<%=  link_to 'New Book', new_book_path %>
+ <%=  link_to 'New Book', new_book_path %>
 <%end%>
