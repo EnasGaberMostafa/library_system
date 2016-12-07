@@ -11,5 +11,87 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require bootstrap
  *= require_self
  */
+    input[type=text]{
+   	width:89.5% !important; 
+   	height:35px !important;
+   	padding-top: 0 !important;
+    margin-top: 0 !important;
+   }
+
+  .nav  li  a  img{
+    width: 20px;
+    height: 20px;
+  }
+
+  hr.style1{
+		border-top: 1px solid #8c8b8b;
+	}
+   
+   body{
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+	.profile-pic img{
+		width: 35px;
+		height: 35px;
+	}
+
+
+  /*footer */
+
+.footer{
+	float: bottom;
+	margin-top: 45px;
+	padding-top: 5px;
+	margin-left: 100px;
+	margin-right: 100px;
+	border-top: 1px solid #616060;
+	color: #999;
+}
+.footer{
+    margin-top: 220px; /* .push must be the same height as .footer */
+}
+.footer a{
+	color: #555;
+}
+
+.footer a:hover{
+	color: #222;
+}
+
+.footer small{
+	float: left;
+}
+
+.footer ul{
+	float: right;
+	list-style: none;
+}
+
+.footer ul li{
+	float: left;
+	margin-left: 10px;
+}
+
+/*field with errors*/
+
+.field_with_errors input, .field_with_errors textarea{
+	border: 1px solid #FC7E7E;
+}
+
+/*Error exeplanation*/
+
+#error_explanation{
+	border: 1px solid #616060;
+	border-radius: 7px;
+	padding-
+	margin: 0;
+}
+
+#error_explanation ul li{
+	list-style: none;
+}

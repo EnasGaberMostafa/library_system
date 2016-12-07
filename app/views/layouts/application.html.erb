@@ -3,21 +3,30 @@
 <head>
   <title>LibrarySystem</title>
   <p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.userName %></strong>.
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+
+  <%if user_signed_in? %>
+   <%= render 'layouts/header_signed_in'%>
+  <%else%>
+   <%= render 'layouts/header_not_signed_in'%>
+  <%end%>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div id="wrap">
+	  <div id="main" class="container clear-top">
+			<div class="row">
+			  <div class="col-md-4"></div>
+			  <div class="col-md-4">
+			  		<p></p>
+			  		<%= yield %>
+			  </div>
+			  <div class="col-md-4"></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 
