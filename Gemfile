@@ -65,3 +65,4 @@ gem 'kaminari'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
 gem 'devise'
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem "twitter-bootstrap-rails"
