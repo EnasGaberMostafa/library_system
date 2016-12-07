@@ -5,6 +5,7 @@ RSpec.describe BooksController, type: :controller do
   #subject { @book }
 before :each do 
   @book = FactoryGirl.build (:book)
+  @book = FactoryGirl.create :book
   @request.env["devise.mapping"]= Devise.mappings[:user]
   # @user = User.create(email:"a_a@a.com",admin:true,password:"123456789",password_confirmation:"123456789",userName:"username")
   # sign_in @user
@@ -12,7 +13,7 @@ before :each do
   sign_in @user
 end
 
-  describe "GET index" do
+  describe "index method test" do
         render_views
     before(:each) do
       @books = 4.times { FactoryGirl.create :book }
@@ -21,7 +22,7 @@ end
 
     it "assigns @books" do
       get :index
-      expect(assigns[:books].size).to eq 4
+      expect(assigns[:books].size).to eq 5
     end
 
     it "show a list of all books" do 
@@ -37,16 +38,11 @@ end
   end
 
 
-  describe "GET show" do
+  describe "show method test " do
     render_views
     before(:each) do
       @book.save
     end
-
-    # it "renders the #show view" do
-    #   get :show, id: @book.id
-    #   response.should render_template :show
-    # end
 
     it "show title" do
       get :show, id:  @book.id
@@ -70,14 +66,34 @@ end
     
   end
 
+  describe "update method test" do
+    render_views
+    before(:each) do
+      @book.save
+      patch :update, {  id: @book.id,
+            book: { title: "new_title", author: "new_author", image: nil,
+                                  BookCode: @book.BookCode, popularity: 5, numOfCopies: 60} }
+      end
+      it "update book title" do
+        expect(assigns[:book].title).to eql "new_title"
+      end
 
-   describe "#create" do
+      it "update book author" do
+        expect(assigns[:book].author).to eql "new_author"
+      end
+
+      it "update book nymber of copies" do
+        expect(assigns[:book].numOfCopies).to eql 60
+      end
+  end
+
+  describe "create method test" do
     render_views
     @book_attributes = FactoryGirl.attributes_for :book
     subject { post :create, :book => { title: @book.title, author: @book.author, image: nil,
                                       BookCode: @book.BookCode, popularity: 5, numOfCopies: 50}}
 
-    it "redirects to book_url(@widget)" do
+    it "redirects to book_url(@book)" do
       expect(subject).to redirect_to(book_url(assigns(:book)))
     end
 
@@ -95,7 +111,7 @@ end
     end
   end
   
-   describe "#new" do
+   describe "new method test" do
     render_views
     it "re-renders the new method" do
       get :new 
@@ -103,59 +119,41 @@ end
     end
    
   end
-  describe "#update" do
-    render_views
-    before(:each) do
-      @book.save
-      patch :update, {  id: @book.id,
-            book: { title: "new_title", author: "new_author", image: nil,
-                                  BookCode: @book.BookCode, popularity: 5, numOfCopies: 60} }
-      end
-      it "renders the json representation for the updated user" do
-        expect(assigns[:book].title).to eql "new_title"
-      end
 
-      it "renders the json representation for the updated user" do
-        expect(assigns[:book].author).to eql "new_author"
-      end
 
-      it "renders the json representation for the updated user" do
-        expect(assigns[:book].numOfCopies).to eql 60
-      end
-  end
-
-  describe "POST #create" do
+  describe "create method test2" do
     before(:each) do
       @book_attributes = FactoryGirl.attributes_for :book
       post :create, { id: @book.id, book: @book_attributes }
     end
 
-    it "renders the json representation for the question record just created" do
+    it "create title properly" do
       expect(assigns[:book].title).to eq @book_attributes[:title]
+    end
+
+    it "create author properly" do
+      expect(assigns[:book].author).to eq @book_attributes[:author]
+    end
+
+    it "create book code properly" do
+      expect(assigns[:book].BookCode).to eq @book_attributes[:BookCode]
+    end
+
+    it "create number of copies properly" do
+      expect(assigns[:book].numOfCopies).to eq @book_attributes[:numOfCopies]
     end
   end
 
-  describe "#create" do
-    render_views
-    @book_attributes = FactoryGirl.attributes_for :book
-    subject { post :create, :book => { title: @book.title, author: @book.author, image: nil,
-                                      BookCode: @book.BookCode, popularity: 5, numOfCopies: 50}}
+  describe 'destroy method test' do
+    context "success" do
+      it "deletes the book" do
+      expect{ 
+        delete :destroy, {  id: @book.id,
+            book: { title: @book.title, author: @book.author, image: nil,
+                                  BookCode: @book.BookCode, popularity: @book.popularity, numOfCopies: @book.numOfCopies} }
+     }.to change(Book, :count).by(-1)
+      end
 
-    it "redirects to widget_url(@widget)" do
-      expect(subject).to redirect_to(book_url(assigns(:book)))
-    end
-
-    it "redirects_to :action => :show" do
-      expect(subject).to redirect_to :action => :show,
-                                     :id => assigns(:book).id
-    end
-
-    it "redirects_to(@widget)" do
-      expect(subject).to redirect_to(assigns(:book))
-    end
-
-    it "redirects_to /widgets/:id" do
-      expect(subject).to redirect_to("/books/#{assigns(:book).id}")
     end
   end
 
