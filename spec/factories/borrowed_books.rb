@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :borrowed_book do
-    userId 1
-    bookId 1
-    borrowDate "2016-12-20"
-    dueDate "2016-12-20"
-    returnDate "2016-12-20"
+    userId 16
+    bookId 9
+    borrowDate "2016-12-21"
+    dueDate "2016-12-21"
+    returnDate ""
   end
 end

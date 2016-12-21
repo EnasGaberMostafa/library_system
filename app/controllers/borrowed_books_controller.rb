@@ -1,9 +1,6 @@
 class BorrowedBooksController < ApplicationController
   before_action :set_borrowed_book, only: [:show, :edit, :update, :destroy]
   before_filter :set_borrowed_book , only: [:show, :edit, :update, :destroy]
-
-
-
   # GET /borrowed_books
   # GET /borrowed_books.json
   def index
@@ -14,7 +11,7 @@ class BorrowedBooksController < ApplicationController
   # GET /borrowed_books/1.json
   def show
   end
-
+  
   # GET /borrowed_books/new
   def new
     @borrowed_book = BorrowedBook.new
@@ -58,7 +55,7 @@ class BorrowedBooksController < ApplicationController
         @book.numOfCopies=@book.numOfCopies+1
         puts @book.numOfCopies
         @book.save
-          borrowed_book.destroy
+        borrowed_book.destroy
 
     if @user!=nil && borrowed_book.returnDate > borrowed_book.dueDate
           puts "userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
@@ -66,13 +63,15 @@ class BorrowedBooksController < ApplicationController
           @user.penalty=@user.penalty+1
           @user.save
           puts @user.errors.full_messages
-       #if @user.penalty > 3 
-
-
-        #       @user.destroy
-       # end    
+       if @user.penalty > 3 
+            count = BorrowedBook.find_by_sql("SELECT * FROM borrowed_books where userId = '#{@user.id}'").count   
+            puts count              
+            if count==0
+              @user.destroy
+              redirect_to users_url, notice: 'User was destroyed because of penalty.'
+            end
+       end    
   end
-
 end
   # PATCH/PUT /borrowed_books/1
   # PATCH/PUT /borrowed_books/1.json

@@ -73,10 +73,18 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book.destroy
-    respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
-      format.json { head :no_content }
+    puts "destrooooooooooooooooooy"
+    count = BorrowedBook.find_by_sql("SELECT * FROM borrowed_books where bookId = '#{@book.id}'").count   
+    puts count              
+    if count==0
+      @book.destroy
+      respond_to do |format|
+        format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else 
+
+       redirect_to books_url, notice: 'Book can not be destroyed.' 
     end
   end
 
