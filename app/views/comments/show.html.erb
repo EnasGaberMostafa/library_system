@@ -1,0 +1,11 @@
+<p>
+  <strong>Body:</strong>
+  <%= @comment.body %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @comment.user.userName %>
+</p>
+
+<%= link_to 'Edit', edit_book_comment_path(@comment, @comment.book) %> |

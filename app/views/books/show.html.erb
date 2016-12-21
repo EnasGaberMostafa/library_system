@@ -32,3 +32,17 @@
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
+<p>Rateeeeee</p>
+<p><%= Rate.average_rate(@book.id).first[0]%></p>
+<%= render :partial => "rates/form", rate: Rate.new %>
+
+<% @book.comments.each do |comment| %>
+    <%= render :partial => comment, comment: comment %>
+<% end %>
+<%= form_for ([@book, Comment.new]) do |f| %>
+  <p>
+  <%= f.label :body, "New Review" %><br/>
+  <%= f.text_area :body %>
+  </p>
+  <p><%= f.submit "Add Review"%></p>
+<% end %>
