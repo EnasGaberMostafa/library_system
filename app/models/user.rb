@@ -8,4 +8,10 @@ class User < ActiveRecord::Base
 
   has_many :comments
   has_many :rates
+
+
+  #validates :userName, :email, :password, :password_confirmation, presence: true
+  has_many :borrowed_books,    dependent: :destroy
+
+
 end

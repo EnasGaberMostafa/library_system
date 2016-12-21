@@ -3,6 +3,10 @@ class BooksController < ApplicationController
   before_filter :authorize_admin, only: [:new,:create, :edit, :destroy]
 
 
+
+
+
+
   # GET /books
   # GET /books.json
   def index
@@ -15,8 +19,12 @@ class BooksController < ApplicationController
       @books = Book.where(conditions, values).order('created_at DESC')
     else
       @books = Book.order('created_at DESC')
+
+
     end
   end
+ 
+
 
   # GET /books/1
   # GET /books/1.json

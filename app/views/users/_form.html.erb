@@ -22,7 +22,9 @@
       <%= f.label "Admin" %> <br />
       <%= f.check_box :admin %> <br />
   </div>
-
+  <div class="field">
+        <%= f.hidden_field :penalty, value: 0 %>  
+  </div>
   <div class="field">
     <%= f.label :password %><br>
     <%= f.text_field :password %>

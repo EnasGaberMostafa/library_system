@@ -1,12 +1,3 @@
-<p id="notice"><%= notice %></p>
-<div class = "row">
-  <%= form_tag url_for(:controller=>"books", :action => "index"), :method => :get do %>
-    <%= text_field_tag :search, nil, :placeholder => 'Search books.', 
-    :class => 'search_form'%>
-    <%= submit_tag "Search", :class => "btn btn-primary"%>
-  <% end %>
-</div>
-<h1>Listing Books</h1>
 
 <table>
   <thead>
@@ -18,7 +9,7 @@
   </thead>
 
   <tbody>
-    <% @books.each do |book| %>
+    <% @mostBooks.each do |book| %>
       <tr>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
@@ -32,8 +23,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-<% if !current_user.nil? && current_user.admin? %>
-<%=  link_to 'New Book', new_book_path %>
-<%end%>

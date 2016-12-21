@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221063524) do
+ActiveRecord::Schema.define(version: 20161220190641) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20161221063524) do
     t.datetime "updated_at",  null: false
   end
 
+<<<<<<< HEAD
   create_table "comments", force: :cascade do |t|
     t.string   "body"
     t.integer  "user_id"
@@ -39,12 +40,30 @@ ActiveRecord::Schema.define(version: 20161221063524) do
     t.integer  "val"
     t.integer  "book_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_index "rates", ["book_id"], name: "index_rates_on_book_id"
   add_index "rates", ["user_id"], name: "index_rates_on_user_id"
+
+  create_table "borrowed_books", force: :cascade do |t|
+    t.integer  "userId"
+    t.integer  "bookId"
+    t.date     "borrowDate"
+    t.date     "dueDate"
+    t.date     "returnDate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "users_id"
+    t.integer  "books_id"
+  end
+
+  add_index "borrowed_books", ["books_id"], name: "index_borrowed_books_on_books_id"
+  add_index "borrowed_books", ["users_id"], name: "index_borrowed_books_on_users_id"
+
+  create_table "borrows", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "userName"
@@ -62,6 +81,7 @@ ActiveRecord::Schema.define(version: 20161221063524) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "penalty",                default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

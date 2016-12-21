@@ -88,10 +88,11 @@
 #error_explanation{
 	border: 1px solid #616060;
 	border-radius: 7px;
-	padding-
 	margin: 0;
 }
-
+.btn{
+	margin: 3;
+}
 #error_explanation ul li{
 	list-style: none;
 }

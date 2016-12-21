@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Userid:</strong>
+  <%= @borrowed_book.userId %>
+</p>
+
+<p>
+  <strong>Bookid:</strong>
+  <%= @borrowed_book.bookId %>
+</p>
+
+<p>
+  <strong>Borrowdate:</strong>
+  <%= @borrowed_book.borrowDate %>
+</p>
+
+<p>
+  <strong>Duedate:</strong>
+  <%= @borrowed_book.dueDate %>
+</p>
+
+<p>
+  <strong>Returndate:</strong>
+  <%= @borrowed_book.returnDate %>
+</p>
+<% if !current_user.nil? && current_user.admin?%>
+        <td><%= link_to 'Return', edit_borrowed_book_path(@borrowed_book) ,:class => "btn btn-default  btn-xs"%></td>
+        <td><%= link_to 'Back',borrowed_books_path,:class => "btn btn-default  btn-xs"%></td>
+<%end%>
