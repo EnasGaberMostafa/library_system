@@ -30,6 +30,22 @@
   <%= image_tag @book.image_url %>
 </p>
 
+
+<p>Rate</p>
+<p><%= Rate.average_rate(@book.id).first[0]%></p>
+<%= render :partial => "rates/form", rate: Rate.new %>
+
+<% @book.comments.each do |comment| %>
+    <%= render :partial => comment, comment: comment %>
+<% end %>
+<%= form_for ([@book, Comment.new]) do |f| %>
+  <p>
+  <%= f.label :body, "New Review" %><br/>
+  <%= f.text_area :body %>
+  </p>
+  <p><%= f.submit "Add Review"%></p>
+<% end %>
+
 <% if !current_user.nil? && current_user.admin?%>
         <td><%= link_to 'Edit', edit_book_path(@book) ,:class => "btn btn-default  btn-xs"%></td>
         <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger btn-xs" %></td>
@@ -37,5 +53,4 @@
 <% if !current_user.nil? && !current_user.admin? && @book.numOfCopies>0%>
   <%=  link_to 'borrow', new_borrowed_book_path(:user_id=>current_user.id,:book_id => params[:id]) %>
 <%end%>
-
 

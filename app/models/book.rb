@@ -12,5 +12,10 @@ class Book < ActiveRecord::Base
       with: %r{\.(gif|jpg|png)\z}i,
       message: 'URL must point to GIT/JPG/PNG pictures'
   }
+
+  has_many :comments
+  has_many :rates
+
   has_many :borrowed_books
+
 end

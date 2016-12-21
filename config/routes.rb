@@ -6,10 +6,16 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users , except: :create 
-      post 'create_user' => 'users#create', as: :create_user 
-      patch 'update_user' => 'users#update', as: :update_user 
+  post 'create_user' => 'users#create', as: :create_user 
+  patch 'update_user' => 'users#update', as: :update_user 
 
-  resources :books
+  resources :books do
+    resources :comments, :only => [:show, :create, :new, :update, :edit]
+    resources :rates, :only => [:create, :update]
+  end
+
+  resources :comments, :only => [:destroy]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

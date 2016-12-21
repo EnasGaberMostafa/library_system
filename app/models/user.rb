@@ -4,8 +4,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :userName, :email, :password, :password_confirmation, presence: true
+
+  has_many :comments
+  has_many :rates
+
 
   #validates :userName, :email, :password, :password_confirmation, presence: true
   has_many :borrowed_books,    dependent: :destroy
+
 
 end
