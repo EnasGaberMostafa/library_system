@@ -1,5 +1,6 @@
 class CreateBorrowedBooks < ActiveRecord::Migration
   def change
+    drop_table :borrowed_books
     create_table :borrowed_books do |t|
       t.integer :userId
       t.integer :bookId

@@ -12,4 +12,7 @@ class Rate < ActiveRecord::Base
 																					 WHERE user_id=#{user_id} AND book_id=#{book_id}")
 	end
 
+	validates :val, numericality: { only_integer: true }
+	validates :val, :user_id, :book_id, presence: true
+
 end
