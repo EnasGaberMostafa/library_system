@@ -7,7 +7,6 @@ class CreateBooks < ActiveRecord::Migration
       t.integer :numOfCopies
       t.integer :popularity
       t.string :image
-
       t.timestamps null: false
     end
   end

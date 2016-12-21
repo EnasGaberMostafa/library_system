@@ -30,5 +30,12 @@
   <%= image_tag @book.image_url %>
 </p>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<% if !current_user.nil? && current_user.admin?%>
+        <td><%= link_to 'Edit', edit_book_path(@book) ,:class => "btn btn-default  btn-xs"%></td>
+        <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger btn-xs" %></td>
+<%end%>
+<% if !current_user.nil? && !current_user.admin? && @book.numOfCopies>0%>
+  <%=  link_to 'borrow', new_borrowed_book_path(:user_id=>current_user.id,:book_id => params[:id]) %>
+<%end%>
+
+

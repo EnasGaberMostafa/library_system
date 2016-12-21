@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+ 
+
+
+  resources :borrowed_books
+
   devise_for :users
   resources :users , except: :create 
       post 'create_user' => 'users#create', as: :create_user 

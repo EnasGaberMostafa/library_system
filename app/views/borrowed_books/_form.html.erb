@@ -1,0 +1,38 @@
+<%= form_for(@borrowed_book) do |f| %>
+  <% if @borrowed_book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@borrowed_book.errors.count, "error") %> prohibited this borrowed_book from being saved:</h2>
+
+      <ul>
+      <% @borrowed_book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% if !current_user.nil? && !current_user.admin?%>
+          <div class="field">
+          <%= f.label :borrowDate %><br>
+          <%= f.date_select :borrowDate %>
+         </div>
+        <div class="field">
+          <%= f.label :dueDate %><br>
+          <%= f.date_select :dueDate %>
+        </div>
+        <div class="field">
+        <%= f.hidden_field :userId, value: params['user_id']%>  
+        </div>
+        <div class="field">
+        <%= f.hidden_field :bookId, value: params['book_id']%>  
+      </div>
+<%end%> 
+<% if !current_user.nil? && current_user.admin?%>
+          <div class="field">
+          <%= f.label :returnDate %><br>
+          <%= f.date_select :returnDate %>
+         </div>
+<%end%> 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

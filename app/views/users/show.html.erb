@@ -9,11 +9,13 @@
   <strong>Password:</strong>
   <%= @user.password %>
 </p>
+  <strong>Penalty:</strong>
+  <%= @user.penalty %>
+</p>
 
 <p>
   <strong>admin:</strong>
   <%= @user.admin %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

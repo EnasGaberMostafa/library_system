@@ -30,7 +30,7 @@ describe Book do
       it { should_not be_valid }
     end
 
-    context "Book code should not be blank" do
+    context "number of copies  should not be blank" do
       before { @book.numOfCopies = nil}
       it { should_not be_valid }
     end

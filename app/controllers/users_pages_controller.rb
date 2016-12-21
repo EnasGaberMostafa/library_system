@@ -11,6 +11,7 @@ class UsersPagesController < ApplicationController
 	    @books = Book.where(conditions, values).order('created_at DESC')
 	  else
 	    @books = Book.order('created_at DESC')
+  	    @mostBooks = Book.order('popularity DESC')
 	  end
 	end
 
